@@ -50,11 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           actions: [
-            Center(
-              child: Container(
-                child: Text("Test"),
-              ),
-            ),
+            Text("tamara"),
+            GestureDetector(
+                onTap: () => {
+                      // blocProvider.dispatch(FetchToDoList()),
+                      setState(() => {isLoading = true}),
+                    },
+                child: Icon(Icons.refresh))
           ],
           title: Text('Bloc API'),
         ),
