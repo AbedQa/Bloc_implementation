@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           actions: [
-     Text("tamara"),
+            Text("tamara"),
             GestureDetector(
                 onTap: () => {
                       // blocProvider.dispatch(FetchToDoList()),
