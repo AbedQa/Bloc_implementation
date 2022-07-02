@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final BuildContext context;
-  ToDoBloc blocProvider;
+  // ToDoBloc blocProvider;
   var isLoading = false;
 
   _MyHomePageState(this.context);
@@ -40,117 +40,66 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     //bloc instance
-    //+
-    blocProvider = ToDoBloc(TodoRepo());
+    //++
+    //blocProvider = ToDoBloc(TodoRepo());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: GestureDetector(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          actions: [
+            Text("tamara")]));
+            GestureDetector(
                 onTap: () => {
-                      blocProvider.dispatch(FetchToDoList()),
+                      // blocProvider.dispatch(FetchToDoList()),
                       setState(() => {isLoading = true}),
                     },
-                child: Icon(Icons.refresh)),
-          )
-        ],
-        title: Text('Bloc API'),
-      ),
-      body: BlocProvider<ToDoBloc>(
-        builder: (context) => blocProvider,
-        child: BlocBuilder<ToDoBloc, GenericState>(
-          builder: (context, state) {
-            if (state is GenericStateError) {
-              return Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Something want wrong',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    GestureDetector(
-                        onTap: () => {blocProvider.dispatch(FetchToDoList())},
-                        child: Icon(Icons.refresh))
-                  ],
-                ),
-              );
-            } else if (state is GenericStateSuccess) {
-              return ListView.builder(
-                itemBuilder: (builder, i) {
-                  return ListTile(
-                    title: Text(state.getToDoList.elementAt(i).id.toString()),
-                    subtitle: Text(state.getToDoList.elementAt(i).title),
-                  );
-                },
-                itemCount: state.getToDoList.length,
-              );
-            } else if (state is GenericStateEmpty) {
-              return Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'No Data Found',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    GestureDetector(
-                        onTap: () => {blocProvider.dispatch(FetchToDoList())},
-                        child: Icon(Icons.refresh))
-                  ],
-                ),
-              );
-            }
-            return Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withAlpha(50),
-                        blurRadius: 5,
-                        spreadRadius: 7,
-                        offset: Offset(0, 1))
-                  ],
-                ),
-                height: 100,
-                width: 100,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Loading',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
+                child: Icon(Icons.refresh))
+          ],
+          title: Text('Bloc API'),
         ),
-      ),
-    );
+        body: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withAlpha(50),
+                    blurRadius: 5,
+                    spreadRadius: 7,
+                    offset: Offset(0, 1))
+              ],
+            ),
+            height: 100,
+            width: 100,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Loading',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   @override
   void dispose() {
-    blocProvider.dispose();
+    //blocProvider.dispose();
     super.dispose();
   }
 }
